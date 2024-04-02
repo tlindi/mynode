@@ -4,11 +4,12 @@ set -x
 source /usr/share/mynode/mynode_app_versions.sh
 
 # Delete old myNode .env file created before 0.12.x
-if [ -f /usr/share/mynode/lnbits.env ]; then
-    rm -f /usr/share/mynode/lnbits.env
-fi
+#if [ -f /usr/share/mynode/lnbits.env ]; then
+#    rm -f /usr/share/mynode/lnbits.env
+#fi
 
-# if current LNbits version config is missign create .env from .env.example 
+# if current LNbits version config is missing, meaning no 0.12.x or newer has been installed
+# then we create .env from .env.example and set version 
 if [ ! -f /mnt/hdd/mynode/lnbits/update_config_$LNBITS_VERSION ]; then
     rm -f /mnt/hdd/mynode/lnbits/update_config_*
     touch /mnt/hdd/mynode/lnbits/update_config_$LNBITS_VERSION
