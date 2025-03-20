@@ -199,6 +199,12 @@ RATHOLE_VERSION=$(get_app_version "$RATHOLE_VERSION" "rathole")
 RATHOLE_VERSION_FILE=/home/bitcoin/.mynode/rathole_version
 RATHOLE_LATEST_VERSION_FILE=/home/bitcoin/.mynode/rathole_version_latest
 
+# Is this needed if Dynamic App ?
+#PHOENIXD_VERSION="v0.5.1"
+#PHOENIXD_VERSION=$(get_app_version "$PHOENIXD_VERSION" "phoenixd")
+#PHOENIXD_VERSION_FILE=/home/bitcoin/.mynode/phoenixd_version
+#PHOENIXD_LATEST_VERSION_FILE=/home/bitcoin/.mynode/phoenixd_version_latest
+
 # Dependency versions
 PYTHON_VERSION="3.8.9"
 
