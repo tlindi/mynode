@@ -28,5 +28,3 @@ docker images --format '{{.Repository}}:{{.Tag}}' | grep 'ghcr.io/getalby/hub' |
 # Pull ready dockers, instead of source
 docker pull ghcr.io/getalby/hub:$VERSION
 docker tag ghcr.io/getalby/hub:$VERSION albyhub
-
-echo "================== DONE INSTALLING APP ================="
