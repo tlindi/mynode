@@ -1,0 +1,47 @@
+#!/bin/bash
+
+source /usr/share/mynode/mynode_device_info.sh
+source /usr/share/mynode/mynode_app_versions.sh
+
+set -x
+set -e
+
+echo "==================== INSTALLING APP ===================="
+
+# The current directory is the app install folder and the app tarball from GitHub
+# has already been downloaded and extracted. Any additional env variables specified
+# in the JSON file are also present.
+
+# TODO: Perform installation steps here
+
+#We use java for all archs which needs OpenJDK21
+# https://adoptium.net/temurin/releases/?package=jdk&version=21
+# JAVA INSTALL
+#in setup_device.sh
+
+git clone https://github.com/acinq/phoenixd.git .
+git checkout ${VERSION}
+
+export JAVAHOME=$JAVA_HOME
+export JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-arm64/
+export PATH_backup=$PATH 
+export PATH=/usr/lib/jvm/temurin-21-jdk-arm64/bin:$PATH
+java --version
+
+/usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
+./gradlew jvmDistZip --info
+
+export PATH=$PATH_backup
+export JAVA_HOME=$JAVAHOME
+
+unzip -o build/distributions/phoenixd-0.5.1-jvm.zip -d .
+mv phoenixd-0.5.1-jvm/bin .
+mv phoenixd-0.5.1-jvm/lib .
+rm -rf phoenixd-0.5.1-jvm
+
+mkdir -p /mnt/hdd/mynode/phoenixd || true
+ln -s /mnt/hdd/mynode/phoenixd ~/.phoenix 
+
+bash -c 'echo y | (./bin/phoenixd & )'
+
+echo "================== DONE INSTALLING APP ================="
