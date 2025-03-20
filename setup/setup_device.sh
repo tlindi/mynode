@@ -438,6 +438,44 @@ echo \
 apt-get update --allow-releaseinfo-change
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin || true
 
+
+# Install javaJDK21 to compile phoenixd (replace with OpenJDK21 when available and supported my phoenixd)
+#
+### I could'n figure how to "tee" files in app installer as 'root' 
+#
+wget -qO- https://packages.adoptium.net/artifactory/api/gpg/key/public  | tee /etc/apt/trusted.gpg.d/adoptium.asc
+echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+apt-get update --allow-releaseinfo-change
+apt -y install temurin-21-jdk
+
+# We want to keep Default OS java as default 
+/usr/bin/update-alternatives --remove java /usr/lib/jvm/temurin-21-jdk-arm64/bin/
+
+# NOT NEEDED as now phoenixd and phoenix-cli wrapper commands at /usr/local/bin
+#
+# Add jdk as JAVA_HOME
+#echo "export JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-arm64; " > /etc/profile.d/jdk.sh
+#grep -qxF '. /etc/profile.d/jdk.sh' /root/.bashrc || echo '. /etc/profile.d/jdk.sh' >> /root/.bashrc
+#source ~/.bashrc
+#
+#echo Default java
+#echo -e "\n"
+#which java
+#echo -e "\n"
+#java --version
+#echo -e "\n"
+#echo Temurin java at JAVA_HOME=$JAVA_HOME
+#$JAVA_HOME/java --version
+
+# Remove Adoption java - when OpenJDK21 Debian available
+#rm -f /etc/apt/trusted.gpg.d/adoptium.asc
+#rm -f /etc/apt/sources.list.d/adoptium.list
+#rm -f /etc/profile.d/jdk.sh
+# sed off ". /etc/profile.d/jdk.sh" from /root/.bashrc 
+#apt -y remove temurin-21-jdk
+#apt -y autoremove
+### jdk end /
+
 # Use systemd for managing docker
 rm -f /etc/init.d/docker
 rm -f /etc/systemd/system/multi-user.target.wants/docker.service
