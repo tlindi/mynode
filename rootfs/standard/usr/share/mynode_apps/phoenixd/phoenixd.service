@@ -12,7 +12,7 @@ WorkingDirectory=/opt/mynode/phoenixd
 ExecStartPre=/usr/bin/is_not_shutting_down.sh
 ExecStartPre=/bin/bash -c 'if [ -f /usr/bin/service_scripts/pre_phoenixd.sh ]; then /bin/bash /usr/bin/service_scripts/pre_phoenixd.sh; fi'
 
-ExecStart=/opt/mynode/phoenixd/bin/phoenixd
+ExecStart=/opt/mynode/phoenixd/bin/phoenixd -http-bind-ip 0.0.0.0 
 
 ExecStartPost=/bin/bash -c 'if [ -f /usr/bin/service_scripts/post_phoenixd.sh ]; then /bin/bash /usr/bin/service_scripts/post_phoenixd.sh; fi'
 
