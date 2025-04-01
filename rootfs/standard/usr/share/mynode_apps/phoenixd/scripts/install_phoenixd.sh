@@ -32,6 +32,9 @@ echo "==================== INSTALLING APP ===================="
 # JAVA INSTALL
 #in setup_device.sh
 
+git clone https://github.com/acinq/phoenixd.git .
+git checkout ${VERSION}
+
 export JAVAHOME=$JAVA_HOME
 export JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-arm64/
 export PATH_backup=$PATH 
@@ -52,7 +55,9 @@ java --version
 # Make app
 /usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
 ./gradlew jvmDistZip --info
-/usr/bin/update-alternatives --remove java temurin-21-jdk-arm64
+#/usr/bin/update-alternatives --remove java temurin-21-jdk-arm64
+
+killall java
 
 export PATH=$PATH_backup
 export JAVA_HOME=$JAVAHOME
@@ -61,6 +66,6 @@ export JAVA_HOME=$JAVAHOME
 #VOLUME [ "/phoenix" ]
 
 # datadir
-mkdir -p $MYNODE_DIR/phoenixd || true
+mkdir -p /mnt/hdd/mynode/phoenixd || true
 
 echo "================== DONE INSTALLING APP ================="
