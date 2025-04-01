@@ -446,8 +446,9 @@ echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_COD
 apt-get update --allow-releaseinfo-change
 apt -y install temurin-21-jdk
 
-# Keep Default java as default 
-/usr/bin/update-alternatives --remove java /usr/lib/jvm/temurin-21-jdk-arm64/bin/
+# If want to keep Default java as default 
+# /usr/bin/update-alternatives --remove java /usr/lib/jvm/temurin-21-jdk-arm64/bin/
+
 # Add jdk as JAVA_HOME
 echo "export JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-arm64; " > /etc/profile.d/jdk.sh
 grep -qxF '. /etc/profile.d/jdk.sh' /root/.bashrc || echo '. /etc/profile.d/jdk.sh' >> /root/.bashrc

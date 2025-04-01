@@ -39,8 +39,20 @@ export PATH=/usr/lib/jvm/temurin-21-jdk-arm64/bin:$PATH
 
 java --version
 
+# jvmDistZip compile 0.5.1 crashes due source is missing .git folder - no use
+# 0.5.0 has gradle 8.9 bug on compile - update gradle to 8.10
+#
+# @gradle/wrapper/gradle-wrapper.properties
+# gradle-8.9-bin -> gradle-8.10-bin
+# distributionSha256Sum=d725d707bfabd4dfdc958c624003b3c80accc03f7037b5122c4b1d0ef15cecab
+# -> distributionSha256Sum=5b9c5eb3f9fc2c94abaea57d90bd78747ca117ddbbf96c859d3741181a12bf2a
+#sed -i 's/gradle-8.9-bin/gradle-8.10-bin/g' gradle/wrapper/gradle-wrapper.properties
+#sed -i 's/d725d707bfabd4dfdc958c624003b3c80accc03f7037b5122c4b1d0ef15cecab/5b9c5eb3f9fc2c94abaea57d90bd78747ca117ddbbf96c859d3741181a12bf2a/g' gradle/wrapper/gradle-wrapper.properties
+
 # Make app
-./gradlew jvmDistZip
+/usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
+./gradlew jvmDistZip --info
+/usr/bin/update-alternatives --remove java temurin-21-jdk-arm64
 
 export PATH=$PATH_backup
 export JAVA_HOME=$JAVAHOME
