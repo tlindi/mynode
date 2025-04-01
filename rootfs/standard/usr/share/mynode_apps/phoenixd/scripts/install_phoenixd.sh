@@ -29,7 +29,7 @@ export PATH=/usr/lib/jvm/temurin-21-jdk-arm64/bin:$PATH
 java --version
 
 /usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
-./gradlew jvmDistZip --info
+./gradlew jvmDistZip
 
 export PATH=$PATH_backup
 export JAVA_HOME=$JAVAHOME
