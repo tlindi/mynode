@@ -62,10 +62,20 @@ killall java
 export PATH=$PATH_backup
 export JAVA_HOME=$JAVAHOME
 
+unzip -o build/distributions/phoenixd-0.5.1-jvm.zip -d .
+mv phoenixd-0.5.1-jvm/bin .
+mv phoenixd-0.5.1-jvm/lib .
+rm -rf phoenixd-0.5.1-jvm
+
 # Expose default data directory as VOLUME when docker
 #VOLUME [ "/phoenix" ]
 
 # datadir
 mkdir -p /mnt/hdd/mynode/phoenixd || true
+ln -s /mnt/hdd/mynode/phoenixd ~/.phoenixd 
+
+
+bash -c 'echo y | (./bin/phoenixd & )'
+
 
 echo "================== DONE INSTALLING APP ================="
