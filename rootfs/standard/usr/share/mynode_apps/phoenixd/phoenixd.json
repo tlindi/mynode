@@ -10,14 +10,17 @@
         "link": "https://github.com/ACINQ/phoenixd"
     },
     "category": "lightning_app",
-    "short_description": "phoenixd is the server equivalent of the popular phoenix wallet for mobile. It is written in Kotlin Multiplatform and runs natively on Linux, MacOS (x86 and ARM), and Windows (WSL).",
+    "short_description": "Lightning Wallet daemon",
     "description": [
+        "phoenixd is the server equivalent of the popular phoenix wallet for mobile.",
+        "It is written in Kotlin Multiplatform and runs natively on Linux,",
+        "MacOS (x86 and ARM), and Windows (WSL).",
         ">self custodial - your keys, your coins no email, no signup",
-		">absolutely -NO configuration get started in seconds",
-		">easy http api - webhook/websocket notifications",
-		">fast, lightweight, native binaries (linux/mac/wsl)",
-		">never miss an incoming payment - fully automated liquidity and channel management",
-		">competitive pricing (~1% receive fee, on par with custodian alternatives)"
+        ">absolutely -NO configuration get started in seconds",
+        ">easy http api - webhook/websocket notifications",
+        ">fast, lightweight, native binaries (linux/mac/wsl)",
+        ">never miss an incoming payment - fully automated liquidity and channel management",
+        ">competitive pricing (~1% receive fee, on par with custodian alternatives)"
     ],
     "latest_version": "v0.5.1",
     "supported_archs": null,
