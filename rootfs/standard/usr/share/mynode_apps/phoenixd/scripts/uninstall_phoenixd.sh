@@ -9,7 +9,11 @@ echo "==================== UNINSTALLING APP ===================="
 
 # TODO: Perform special uninstallation steps here
 
-rm -rfv /home/bitcoin/.phoenixd
-rm -rfv /mnt/hdd/mynode/phoenixd
+#
+# TODO - Implement backup on uninstall
+#
+# not do
+#rm -rfv /home/bitcoin/.phoenix
+#rm -rfv /mnt/hdd/mynode/phoenixd
 
 echo "================== DONE UNINSTALLING APP ================="
