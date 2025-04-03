@@ -13,9 +13,10 @@ docker images --format '{{.Repository}}:{{.Tag}}' | grep 'ghcr.io/getalby/hub' |
 
 # no backup / restore implemented
 
-# TODO - Implement backup!
+# TODO - Implement (proper) backup!
 #
-# do not
-#rm -rfv /mnt/hdd/mynode/albyhub
+rm -rf /mnt/hdd/mynode/albyhub_backup
+cp -av /mnt/hdd/mynode/albyhub /mnt/hdd/mynode/albyhub_backup || true
+rm -rf /mnt/hdd/mynode/albyhub
 
 echo "================== DONE UNINSTALLING APP ================="
