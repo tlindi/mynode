@@ -194,28 +194,6 @@ while true; do
     fi
     touch /tmp/need_application_refresh
 
-
-    # Upgrade LNbits
-    if should_install_app "lnbits" ; then
-        CURRENT=""
-        if [ -f $LNBITS_VERSION_FILE ]; then
-            CURRENT=$(cat $LNBITS_VERSION_FILE)
-        fi
-        if [ "$CURRENT" != "$LNBITS_VERSION" ]; then
-            docker rmi $(docker images --format '{{.Repository}}:{{.Tag}}' | grep 'lnbits') || true
-
-            # Copy over config file
-            # Handled in pre_lnbits.sh
-
-            # Pull lnbits docker container
-             docker pull lnbits/lnbits:$LNBITS_VERSION
-             docker tag lnbits/lnbits:$LNBITS_VERSION lnbits
-
-            echo $LNBITS_VERSION > $LNBITS_VERSION_FILE
-        fi
-    fi
-
-
     # Install Dojo
     DOJO_UPGRADE_URL=https://code.samourai.io/dojo/samourai-dojo/-/archive/$DOJO_VERSION/samourai-dojo-$DOJO_VERSION.tar.gz
     DOJO_UPGRADE_URL_FILE=/mnt/hdd/mynode/settings/dojo_url

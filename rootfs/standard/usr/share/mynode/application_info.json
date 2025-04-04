@@ -397,22 +397,6 @@
         "is_premium": true
     },
     {
-        "name": "LNbits",
-        "short_name": "lnbits",
-        "short_description": "Lightning Wallet",
-        "author": {"name": "LNbits", "link": "https://lnbits.com"},
-        "website": {"name": "GitHub", "link": "https://github.com/lnbits/lnbits-legend"},
-        "description": "LNbits can run on top of any lightning-network funding source, currently there is support for LND, c-lightning, Spark, LNpay, OpenNode, lntxbot, with more being added regularly.",
-        "category": "lightning_app",
-        "can_uninstall": true,
-        "show_on_status_page": true,
-        "show_on_homepage": true,
-        "homepage_order": 35,
-        "requires_lightning": true,
-        "requires_docker_image_installation": true,
-        "is_premium": true
-    },
-    {
         "name": "Warden Terminal",
         "short_name": "wardenterminal",
         "short_description": "Bitcoin Dashboard",

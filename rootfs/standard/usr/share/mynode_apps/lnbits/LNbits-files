@@ -1,0 +1,26 @@
+* CHANGELOG
+* rootfs/standard/etc/nginx/sites-enabled/https_lnbits.conf
+# rootfs/standard/etc/nginx/sites-enabled/https_public_apps.conf To Dynamicaze
+* rootfs/standard/etc/tor/torrc
+* rootfs/standard/etc/systemd/system/lnbits.service
+# rootfs/standard/usr/bin/mynode-get-status
+* rootfs/standard/usr/bin/mynode_docker_images.sh
+* rootfs/standard/usr/bin/mynode_startup.sh
+* rootfs/standard/usr/bin/mynode_stop_critical_services.sh
+* rootfs/standard/usr/bin/service_scripts/pre_lnbits.sh
+* rootfs/standard/usr/share/mynode/application_info.json
+* rootfs/standard/usr/share/mynode/lnbits.env <- app_data
+* rootfs/standard/usr/share/mynode/mynode_app_versions.sh
+# rootfs/standard/var/pynode/device_info.py To Dynamicaze
+# rootfs/standard/var/pynode/public_apps.py To Dynamicaze
+# rootfs/standard/var/www/mynode/api.py To Dynamicaze
+# rootfs/standard/var/www/mynode/mynode.py * tor onion jotain
+* rootfs/standard/var/www/mynode/settings.py Settings Page DELETE lnbits settings
+* rootfs/standard/var/www/mynode/templates/about.html
+* rootfs/standard/var/www/mynode/templates/main.html
+# rootfs/standard/var/www/mynode/templates/settings.html To Dynamicaze
+* rootfs/standard/var/www/mynode/tor.py
+* scripts/check_app_versions.py
+* rootfs/standard/var/www/mynode/static/images/screenshots/lnbits/*
+* rootfs/standard/var/www/mynode/static/images/app_icons/lnbitx.png -> lnbits.png
+* rootfs/standard/usr/share/mynode/application_info.json
