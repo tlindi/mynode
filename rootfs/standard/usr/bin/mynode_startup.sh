@@ -245,7 +245,6 @@ mkdir -p /mnt/hdd/mynode/docker
 mkdir -p /mnt/hdd/mynode/rtl
 mkdir -p /mnt/hdd/mynode/rtl_backup
 mkdir -p /mnt/hdd/mynode/whirlpool
-mkdir -p /mnt/hdd/mynode/lnbits
 mkdir -p /mnt/hdd/mynode/specter
 mkdir -p /mnt/hdd/mynode/ckbunker
 mkdir -p /mnt/hdd/mynode/sphinxrelay
@@ -583,10 +582,6 @@ fi
 USER=$(stat -c '%U' /mnt/hdd/mynode/whirlpool)
 if [ "$USER" != "bitcoin" ]; then
     chown -R bitcoin:bitcoin /mnt/hdd/mynode/whirlpool
-fi
-USER=$(stat -c '%U' /mnt/hdd/mynode/lnbits)
-if [ "$USER" != "bitcoin" ]; then
-    chown -R bitcoin:bitcoin /mnt/hdd/mynode/lnbits
 fi
 USER=$(stat -c '%U' /mnt/hdd/mynode/rtl)
 if [ "$USER" != "bitcoin" ]; then

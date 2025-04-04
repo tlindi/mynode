@@ -30,7 +30,7 @@ printStatus btcrpcexplorer btcpayserver dojo firewall https glances \
 	    lndconnect lndhub mempool netdata quicksync rtl webssh2 whirlpool www | column -t
 
 echo -e "\n:::::::Beta-Apps:::::::"
-printStatus caravan lnbits specter thunderhub | column -t
+printStatus caravan specter thunderhub | column -t
 
 # Remaining services are listed here
 

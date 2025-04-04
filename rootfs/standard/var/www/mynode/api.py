@@ -315,20 +315,26 @@ def api_get_usb_info():
         data["data"] = str(e)
     return generate_api_json_response(data)
 
+# To Dynamicaze
 @mynode_api.route("/api/get_lnbits_superuser")
 def api_get_lnbits_superuser():
     check_logged_in()
 
     data = {}
-    data["status"] = "error"
     data["data"] = "UNKNOWN"
+    data["status"] = "error"
     try:
-        info = ""
+        info = get_lnbits_superuser_setup() + "\n"
 
-        info += to_string(subprocess.check_output("cat /mnt/hdd/mynode/lnbits/.super_user", shell=True))
-        info += "\n"
+        if not os.path.isfile("/mnt/hdd/mynode/lnbits/database.sqlite3"):
+            info += "LNbits database NOT initialized! super_user details cannot be fetched.\n"
+        else:
+            info += "LNbits super_user configured in database:\n"
+            info += get_lnbits_superuser() + "\n"
+
         data["data"] = info
         data["status"] = "success"
+
     except Exception as e:
         data["data"] = str(e)
     return generate_api_json_response(data)

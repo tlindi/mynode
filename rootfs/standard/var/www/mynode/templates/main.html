@@ -460,22 +460,6 @@
                     window.open(url,'_blank');
                 })
 
-                $("#lnbits").on("click", function() {
-                    hostname=location.hostname
-                    port_string=""
-                    if (is_using_tor()) {
-                        hostname="{{lnbits_onion}}"
-                        // Use "default" port - either 80 or 443 for HTTP/HTTPS
-                    } else {
-                        port_string=":5000"
-                        if (location.protocol == "https:") {
-                            port_string=":5001"
-                        }
-                    }
-                    url = location.protocol+'//'+hostname+port_string
-                    window.open(url,'_blank');
-                })
-
                 $("#thunderhub").on("click", function() {
                     hostname=location.hostname
                     port="3030"
