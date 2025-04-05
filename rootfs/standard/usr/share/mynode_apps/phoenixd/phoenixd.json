@@ -34,10 +34,10 @@
     "install_env_vars": {
 	    "JAVA_HOME": "/usr/lib/jvm/temurin-21-jdk-arm64"
     },
-    "supports_app_page": true,
+    "supports_app_page": false,
     "supports_testnet": false,
     "http_port": "9740",
-    "https_port": "9741",
+    "https_port": {},
     "requires_bitcoin": false,
     "requires_docker_image_installation": false,
     "requires_electrs": false,
@@ -56,6 +56,11 @@
             "heading": "Instructions",
             "content": [
                 "See phonixd app screenshots from Mynode App Market to see usage.",
+                "phoenixd runs as a daemon service and used via http 9740 API or",
+                "phoenix-cli. CLI is in PATH and has <TAB> completition similar to bash.",
+                "Completition is bit slow due phoenix-cli (as well as phoenixd)",
+                "is big java applications and take while to launch."
+                "",
                 "Enjoy!"
             ]
         }
