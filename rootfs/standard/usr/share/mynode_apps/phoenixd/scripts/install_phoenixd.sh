@@ -19,19 +19,27 @@ echo "==================== INSTALLING APP ===================="
 # JAVA INSTALL
 #in setup_device.sh
 
+rm -rf .*
+rm -rf *
+
 git clone https://github.com/acinq/phoenixd.git .
 git checkout ${VERSION}
 
 export JAVAHOME=$JAVA_HOME
 export JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-arm64/
-export PATH_backup=$PATH 
+export PATH_backup=$PATH
 export PATH=/usr/lib/jvm/temurin-21-jdk-arm64/bin:$PATH
 java --version
 
-/usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
+# sudo /usr/bin/update-alternatives --install /usr/bin/java java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java 1
+#
+#/usr/bin/update-alternatives --set java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
+# needs root, do manually before installation
+# :-(
+#
 ./gradlew jvmDistZip
 
-/usr/bin/update-alternatives --remove java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
+# only root /usr/bin/update-alternatives --remove java /usr/lib/jvm/temurin-21-jdk-arm64/bin/java
 
 export PATH=$PATH_backup
 export JAVA_HOME=$JAVAHOME
@@ -42,14 +50,19 @@ mv phoenixd-0.5.1-jvm/lib .
 rm -rf phoenixd-0.5.1-jvm
 
 # Let's make wrapper files to run phoenix with correct java 21
-echo JAVACMD=/usr/lib/jvm/java-21-openjdk-amd64/bin/java /opt/mynode/phoenixd/bin/phoenix-cli \$\@ > /usr/local/bin/phoenix-cli
-chmod +x /usr/local/bin/phoenix-cli
-echo JAVACMD=/usr/lib/jvm/java-21-openjdk-amd64/bin/java /opt/mynode/phoenixd/bin/phoenixd \$\@ > /usr/local/bin/phoenixd
-chmod +x /usr/local/bin/phoenixd
-
-# install phoemix-cli bash style completition 
-cp /usr/share/mynode_apps/phoenixd/app_data/phoenix-cli /etc/bash_completion.d/
-source /etc/bash_completion.d/phoenix-cli
+# also these need root :-/
+#
+#echo #!/bin/sh > /usr/local/bin/phoenixd
+#echo JAVACMD=/usr/lib/jvm/java-21-openjdk-amd64/bin/java /opt/mynode/phoenixd/bin/phoenixd \$\@ >> /usr/local/bin/phoenixd
+#chmod +x /usr/local/bin/phoenixd
+#
+#echo #!/bin/sh > /usr/local/bin/phoenix-cli
+#echo JAVACMD=/usr/lib/jvm/java-21-openjdk-amd64/bin/java /opt/mynode/phoenixd/bin/phoenix-cli \$\@ >> /usr/local/bin/phoenix-cli
+#chmod +x /usr/local/bin/phoenix-cli
+#
+# install phoemix-cli bash style completition (needs root)
+#cp /usr/share/mynode_apps/phoenixd/app_data/phoenix-cli /etc/bash_completion.d/
+#source /etc/bash_completion.d/phoenix-cli
 
 mkdir -p /mnt/hdd/mynode/phoenixd || true
 
@@ -58,6 +71,6 @@ ln -s /mnt/hdd/mynode/phoenixd ~/.phoenix
 # Lets initial run to accept terms and create wallet
 #Implement recovery if backup exist, after backup is implemented
 #
-bash -c 'echo y | (./phoenixd & )'
+bash -c 'echo y | (/opt/mynode/phoenixd/bin/phoenixd & )'
 
 echo "================== DONE INSTALLING APP ================="
