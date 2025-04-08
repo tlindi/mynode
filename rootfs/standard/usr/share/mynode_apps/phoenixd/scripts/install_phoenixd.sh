@@ -19,6 +19,8 @@ echo "==================== INSTALLING APP ===================="
 # JAVA INSTALL
 #in setup_device.sh
 
+mkdir /opt/mynode/phoenixd
+
 rm -rf .*
 rm -rf *
 
