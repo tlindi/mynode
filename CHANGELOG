@@ -1,4 +1,5 @@
 - Upgrade LNbits to 1.0.x and change to Dynamic App
+- Update LNbits to v1.0.0-rc10 and use vendors docker
 
 === v0.3.35 ===
 - Released 03/29/25
