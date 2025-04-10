@@ -1250,6 +1250,108 @@ def delete_lnbits_settings():
     if is_service_enabled("lnbits"):
         restart_service("lnbits")
 
+def create_tmp_lnbits_super_user():
+    # Set .env path
+    env_file_path = "/mnt/hdd/mynode/lnbits/.env"
+
+    superusertmp_id = ''
+
+    # Check if the user already exists in the database
+    print("Checking if 'superusertmp' user exists in the database...")
+    superusertmp_id = os.popen("sqlite3 /mnt/hdd/mynode/lnbits/database.sqlite3 \
+                               \"SELECT id FROM accounts WHERE username='superusertmp';\" | \
+                               sed 's/\"//g'").read().strip()
+
+    # Find ID (and reset password) or create new temporary user if not exists
+    if superusertmp_id:
+        print(f"Username 'superusertmp' already exists with ID: {superusertmp_id}")
+        print(f"Resetting password to 'securebolt'")
+        subprocess.run(
+            f"sudo sqlite3 /mnt/hdd/mynode/lnbits/database.sqlite3 "
+            f"\"UPDATE accounts SET password_hash = "
+            f"'\\$2b\\$12\\$9pijx8vNNNT1SoDT2cJJj.wcLw/Qn3URr3odVCel9keRDPOZ89jGi' "
+            f"WHERE username = 'superusertmp';\"",
+            shell=True
+        )
+
+    else:
+        print("Username 'superusertmp' does not exist. Creating a new user...")
+        try:
+            new_user = subprocess.check_output(
+                ["/usr/bin/docker", "run", "--rm",
+                 "--name", "create-tmp-lnbits_super_user",
+                 "--volume", "/mnt/hdd/mynode/lnbits/.env:/app/.env",
+                 "--volume", "/mnt/hdd/mynode/lnbits/:/app/data",
+                 "lnbits", "poetry", "run", "lnbits-cli", "users", "new", "-u", "superusertmp", "-p", "securebolt"],
+                text=True
+            )
+
+            # Extract ID from the new_user output
+            for line in new_user.splitlines():
+                if "Id:" in line:
+                    superusertmp_id = line.split("Id:")[1].strip()
+                    print(f"superusertmp ID parsed from new user command output: {superusertmp_id}")
+
+        except subprocess.CalledProcessError as e:
+            print("Error while running: lnbits-cli user new")
+            print(f"Error details: {e.output}")
+            return
+
+    # Update the SUPER_USER in the .env file
+    if superusertmp_id:
+        subprocess.run(
+            f"sudo sed -i '/^SUPER_USER=/d;/^$/d' {env_file_path}",
+            shell=True
+        )
+        subprocess.run(
+            f"sudo sed -i '$a SUPER_USER={superusertmp_id}' {env_file_path}",
+            shell=True
+        )
+        print(f"Updated SUPER_USER in {env_file_path}")
+
+        print("LNbits service restarting now to enable superusertmp as super_user.")
+        restart_service("lnbits")
+        print("LNbits service has been restarted with superusertmp as super_user.")
+    else:
+        print("superusertmp_id was not able to be defined and new super_user is NOT setup correctly")
+
+def deactivate_tmp_lnbits_super_user():
+    env_file_path = "/mnt/hdd/mynode/lnbits/.env"
+
+    os.system("echo assign super_user back to username\: admin")
+
+    print("Disabling login for superusertmp.")
+    # Remove 'superusertmp' password_hash to disable login
+    subprocess.run(
+        f"sudo sqlite3 /mnt/hdd/mynode/lnbits/database.sqlite3 "
+        f"\"UPDATE accounts SET password_hash = "
+        f"'' "
+        f"WHERE username = 'superusertmp';\"",
+        shell=True
+    )
+
+     # Run SQLite command and retrieve user 'admin's ID
+    admin_user_id = os.popen("sudo sqlite3 /mnt/hdd/mynode/lnbits/database.sqlite3 \
+        \"SELECT id FROM accounts WHERE username='admin';\" | sed 's/\"//g'").read().strip()
+
+    # Update .env file with the user 'admin's ID
+    os.system(f"sed -i '/^SUPER_USER=/d;/^$/d' {env_file_path}")
+    os.system(f"sed -i '$a SUPER_USER={admin_user_id}' {env_file_path}")
+
+    # Activate 'admin' SUPER_USER with restart the service
+    print("LNbits service restarting now to restore admin as super_user.")
+    restart_service("lnbits")
+    print("LNbits service has been restarted with admin as super_user.")
+
+    # Information of super_user is now in database.sqlite3 database table system_settings and can be removed from .env file
+    print("Remove 'SUPER_USER=' from .env")
+    os.system(f"sed -i '/^SUPER_USER=/d;/^$/d' {env_file_path}")
+
+    # Activate cleaned .env with restart the service (superusertmp is now only admin, and should be deleted manually from UI).
+    print("LNbits service restarting now to deactivate superusertmp super_user rights.")
+    restart_service("lnbits")
+    print("LNbits service has been restarted. superusertmp is no longer super_user.")
+    
 #==================================
 # Specter Functions
 #==================================

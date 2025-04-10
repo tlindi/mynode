@@ -606,6 +606,31 @@ def delete_lnbits_settings_page():
     flash("LNbits Settings Deleted", category="message")
     return redirect("/settings")
 
+@mynode_settings.route("/settings/create-tmp-lnbits-super_user")
+def create_tmp_lnbits_super_user_page():
+    check_logged_in()
+    if is_service_enabled("lnbits"):
+        t = Timer(1.0, create_tmp_lnbits_super_user)
+        t.start()
+        flash("LNbits super_user \"superusertmp\" with password \"securebolt\" created.\nWait for LNbits to restart!", category="message")
+    else:
+        flash("LNbits super_user changes are possible only when service is active.", category="message")
+
+    return redirect("/settings")
+
+@mynode_settings.route("/settings/deactivate-tmp-lnbits-super_user")
+def deactivate_tmp_lnbits_super_user_page():
+    check_logged_in()
+    if is_service_enabled("lnbits"):
+        t = Timer(1.0, deactivate_tmp_lnbits_super_user)
+        t.start()
+        flash("LNbits super_user is now changed back to \"admin\"\nWait for LNbits to restart!", category="message")
+        flash("You may delete superusertmp from LNbits now.", category="message")
+    else:
+        flash("LNbits super_user changes are possible only when service is active.", category="message")
+
+    return redirect("/settings")
+
 @mynode_settings.route("/settings/reset-specter-config")
 def reset_specter_config_page():
     check_logged_in()
