@@ -596,16 +596,6 @@ def reset_thunderhub_config_page():
     flash("Thunderhub Configuration Reset", category="message")
     return redirect("/settings")
 
-@mynode_settings.route("/settings/delete-lnbits-settings")
-def delete_lnbits_settings_page():
-    check_logged_in()
-
-    t = Timer(1.0, delete_lnbits_settings)
-    t.start()
-
-    flash("LNbits Settings Deleted", category="message")
-    return redirect("/settings")
-
 @mynode_settings.route("/settings/create-tmp-lnbits-super_user")
 def create_tmp_lnbits_super_user_page():
     check_logged_in()

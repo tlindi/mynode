@@ -725,17 +725,6 @@
                     $('#loading_spinner_overlay').fadeIn();
                     window.location.href='/settings/toggle_setting?name=torify_apt_get&enable='+val
                 });
-
-                $("#run-lnbits-cli-superuser").on("click", function() {
-                    $("#run-lnbits-cli-superuser").prop("disabled",true);
-                    $("#run-lnbits-cli-superuser-result").html("Loading...");
-                    $.get("/api/get_lnbits_superuser")
-                        .done(function( data ) {
-                            $("#run-lnbits-cli-superuser").prop("disabled",false);
-                            $("#run-lnbits-cli-superuser-result").html( data["data"] );
-                        }
-                    );
-                });
             });
 
             function hideAllUpgradeLogs() {
@@ -1260,11 +1249,6 @@
             <a id="lnbits"></a>
             <div class="settings_block_header">LNbits</div>
 
-            <div class="settings_block_subheader">Reset Settings</div>
-            This will delete your LNbits settings from the database. This should not impact users, wallets and installed extension data. After deletion, LNbits will re-read its default settings from the environment file and save it in the new settings database. This will also reset super user username and password.
-            <br/>
-            <a href="/settings/delete-lnbits-settings" class="ui-button ui-widget ui-corner-all settings_button">Delete Settings</a>
-            </br>
             <div class="settings_block_subheader">Create Recovery super_user</div>
             This will create temporary super_user to recover lost super_user access.</br>
 			Username to be created: superusertmp</br>
