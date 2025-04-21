@@ -58,7 +58,10 @@ CHANTOOLS_LATEST_VERSION_FILE=/home/bitcoin/.mynode/chantools_version_latest
 CHANTOOLS_UPGRADE_MANIFEST_URL=https://github.com/lightninglabs/chantools/releases/download/$CHANTOOLS_VERSION/manifest-$CHANTOOLS_VERSION.txt
 CHANTOOLS_UPGRADE_MANIFEST_SIG_URL=https://github.com/lightninglabs/chantools/releases/download/$CHANTOOLS_VERSION/manifest-$CHANTOOLS_VERSION.sig
 
-ELECTRS_VERSION="v0.9.9"
+ELECTRS_VERSION="v0.10.9"
+if [ "$IS_32_BIT" = "1" ]; then
+    ELECTRS_VERSION="v0.9.9"
+fi
 ELECTRS_VERSION_FILE=/home/bitcoin/.mynode/electrs_version
 ELECTRS_LATEST_VERSION_FILE=/home/bitcoin/.mynode/electrs_version_latest
 
@@ -207,7 +210,7 @@ PYTHON_ARM32_GRPCIO_VERSION="1.40.0"
 NODE_JS_VERSION="18.x"
 NODE_NPM_VERSION="^8.1.0"
 
-RUST_VERSION="1.56.1"
+RUST_VERSION="1.86.0"
 
 GO_VERSION="1.19.4"
 GO_VERSION_FILE=/home/bitcoin/.mynode/go_version
