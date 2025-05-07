@@ -30,7 +30,7 @@ have support or patial support.
  - Lightning
  - Electrum Server
  - Ride the Lightning
- - THunderhub
+ - Thunderhub
  - Specter
  - Bitcoin RPC Explorer
 
