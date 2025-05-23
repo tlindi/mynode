@@ -128,3 +128,55 @@ function toggleEnabled(short_name, full_name, enable, return_page="") {
                            });
     }
 }
+
+// ==========================================
+// Manage app data
+// ==========================================
+
+// function restart_app_via_api(name, short_name) {
+function backup_app_data_via_api(name, short_name) {
+    if ( confirm("Are you sure you want to backup "+name+"? This will stop, backup data and start app.") ) {
+        $('#loading_spinner_message').html("Making backup...");
+        $('#loading_spinner_overlay').fadeIn();
+        $.get('/api/backup_app_data?app='+short_name)
+            .done(function( data ) {
+                if (data != "OK") {
+                    alert("Error backupping app data: "+data)
+                }
+                $('#loading_spinner_overlay').fadeOut();
+            }
+        );
+    }
+}
+
+// function restart_app_via_api(name, short_name) {
+function restore_app_data_via_api(name, short_name) {
+    if ( confirm("Are you sure you want to restore backup "+name+"? This will stop, DELETE DATA, restore backup and start app.") ) {
+        $('#loading_spinner_message').html("Restoring...");
+        $('#loading_spinner_overlay').fadeIn();
+        $.get('/api/restore_app_data?app='+short_name)
+            .done(function( data ) {
+                if (data != "OK") {
+                    alert("Error restoring app data: "+data)
+                }
+                $('#loading_spinner_overlay').fadeOut();
+            }
+        );
+    }
+}
+
+// function restart_app_via_api(name, short_name) {
+function remove_app_data_via_api(name, short_name) {
+    if ( confirm("Are you sure you want to backup "+name+"? This will stop app, REMOVE ALL THE DATA and start app.") ) {
+        $('#loading_spinner_message').html("Removing data...");
+        $('#loading_spinner_overlay').fadeIn();
+        $.get('/api/remove_app_data?app='+short_name)
+            .done(function( data ) {
+                if (data != "OK") {
+                    alert("Error removing app data: "+data)
+                }
+                $('#loading_spinner_overlay').fadeOut();
+            }
+        );
+    }
+}
