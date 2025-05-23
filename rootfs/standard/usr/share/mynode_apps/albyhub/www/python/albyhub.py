@@ -28,5 +28,5 @@ def albyhub_page():
         "app_status_color": app_status_color,
         "app": app
     }
-    return render_template('/app/generic_app.html', **templateData)
+    return render_template('/app/albyhub/albyhub.html', **templateData)
 
