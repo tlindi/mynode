@@ -135,7 +135,7 @@ function toggleEnabled(short_name, full_name, enable, return_page="") {
 
 // function restart_app_via_api(name, short_name) {
 function backup_app_data_via_api(name, short_name) {
-    if ( confirm("Are you sure you want to backup "+name+"? This will stop, backup data and start app.") ) {
+    if ( confirm("Are you sure you want to BACKUP current app data "+name+"? This will stop, backup data and start app.") ) {
         $('#loading_spinner_message').html("Making backup...");
         $('#loading_spinner_overlay').fadeIn();
         $.get('/api/backup_app_data?app='+short_name)
@@ -151,7 +151,7 @@ function backup_app_data_via_api(name, short_name) {
 
 // function restart_app_via_api(name, short_name) {
 function restore_app_data_via_api(name, short_name) {
-    if ( confirm("Are you sure you want to restore backup "+name+"? This will stop, DELETE DATA, restore backup and start app.") ) {
+    if ( confirm("Are you sure you want to RESTORE backup data"+name+"? This will stop, DELETE DATA, restore backup and start app.") ) {
         $('#loading_spinner_message').html("Restoring...");
         $('#loading_spinner_overlay').fadeIn();
         $.get('/api/restore_app_data?app='+short_name)
@@ -167,7 +167,7 @@ function restore_app_data_via_api(name, short_name) {
 
 // function restart_app_via_api(name, short_name) {
 function remove_app_data_via_api(name, short_name) {
-    if ( confirm("Are you sure you want to backup "+name+"? This will stop app, REMOVE ALL THE DATA and start app.") ) {
+    if ( confirm("Are you sure you want to REMOVE ALL APP DATA "+name+"? This will stop app, REMOVE ALL THE DATA and start app.") ) {
         $('#loading_spinner_message').html("Removing data...");
         $('#loading_spinner_overlay').fadeIn();
         $.get('/api/remove_app_data?app='+short_name)
