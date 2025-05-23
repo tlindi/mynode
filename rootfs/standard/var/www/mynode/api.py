@@ -149,6 +149,48 @@ def api_restart_app():
 
     return "OK"
 
+#    @mynode_api.route("/api/restart_app")
+@mynode_api.route("/api/backup_app_data")
+def api_backup_app_data():
+#    check_logged_in()
+#
+#    app = request.args.get("app")
+#    if not app:
+#        return "NO_APP_SPECIFIED"
+#    if not is_application_valid(app):
+#        return "INVALID_APP_NAME"
+#    if not restart_application(app):
+#        return "ERROR"
+    return "OK"
+
+#    @mynode_api.route("/api/restart_app")
+@mynode_api.route("/api/restore_app_data")
+def api_restore_app_data():
+#    check_logged_in()
+#
+#    app = request.args.get("app")
+#    if not app:
+#        return "NO_APP_SPECIFIED"
+#    if not is_application_valid(app):
+#        return "INVALID_APP_NAME"
+#    if not restart_application(app):
+#        return "ERROR"
+    return "OK"
+
+#    @mynode_api.route("/api/restart_app")
+@mynode_api.route("/api/remove_app_data")
+def api_remove_app_data():
+#    check_logged_in()
+#
+#    app = request.args.get("app")
+#    if not app:
+#        return "NO_APP_SPECIFIED"
+#    if not is_application_valid(app):
+#        return "INVALID_APP_NAME"
+#    if not restart_application(app):
+#        return "ERROR"
+    return "OK"
+
 @mynode_api.route("/api/get_device_info")
 def api_get_device_info():
     check_logged_in()
