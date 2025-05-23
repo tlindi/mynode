@@ -68,5 +68,6 @@
     "homepage_section": "apps",
     "homepage_order": 91,
     "app_type": "custom",
-    "sdk_version": 2
+    "sdk_version": 2,
+    "data_manageable": true
 }
