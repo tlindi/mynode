@@ -81,6 +81,12 @@
                         <!-- Manage App: Restart, Reset Data, Etc... -->
                         {% if app.is_enabled %}
                             <button class="ui-button ui-widget ui-corner-all mynode_button app_page_button" onclick="restart_app_via_api('{{ app.name }}', '{{ app.short_name }}');">Restart</button>
+//  Need to implement generic support for app data management in MyNodeBTC Core
+//                        {% if app.is_enabled and "app.APP_DATA_MANAGEABLE" %}
+//  But for now, just show Remove Data Button, on this generic_app.html derived file.
+//  Later update also generic.html on Core.
+                            <button class="ui-button ui-widget ui-corner-all mynode_button app_page_button" onclick="remove_app_data_via_api('{{ app.name }}', '{{ app.short_name }}');">Remove Data</button>
+//                        {% endif %}
 
                             {% for btn in app.app_page_additional_buttons %}
                                 <button class="ui-button ui-widget ui-corner-all mynode_button app_page_button"
