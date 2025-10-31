@@ -132,7 +132,7 @@ fi
 BTCPAYSERVER_VERSION=$(get_app_version "$BTCPAYSERVER_VERSION" "btcpayserver")
 BTCPAYSERVER_VERSION_FILE=/home/bitcoin/.mynode/btcpayserver_version
 BTCPAYSERVER_LATEST_VERSION_FILE=/home/bitcoin/.mynode/btcpayserver_version_latest
-# Installer is mynode_docker_images.sh
+## Installer is mynode_docker_images.sh
 # Creates
 #  /etc/profile.d/btcpay-env.sh
 #  /mnt/hdd/mynode/btcpayserver/.env
@@ -140,15 +140,24 @@ BTCPAYSERVER_LATEST_VERSION_FILE=/home/bitcoin/.mynode/btcpayserver_version_late
 #   ^ which has version info of 2.2.1 and nxb 2.5.3+0-1
 # Coming from here: /mnt/hdd/mynode/btcpayserver/btcpayserver-docker/docker-compose-generator/docker-fragments/nbxplorer.ym
 #
-# DB backup
+## DB backup
 # # 1. Create the backup directory
 # sudo mkdir -p /mnt/hdd/mynode/btcpayserver_backup
 #
 # 2. Run a full Postgres dump from the container
 # sudo mkdir /mnt/hdd/mynode/btcpayserver_backup
 # sudo sh -c "docker exec -t generated_postgres_1 pg_dumpall -c -U postgres > /mnt/hdd/mynode/btcpayserver_backup/btcpay_postgres_$(date +%F).sql"
-
-
+#
+## DB restore
+#
+# cd /mnt/hdd/mynode/btcpayserver
+# docker compose down
+#
+# docker compose up -d postgres
+#
+# cat /mnt/hdd/mynode/btcpayserver_backup/btcpay_postgres_<BACKUP_VERSION>.sql | docker exec -i generated_postgres_1 psql -U postgres
+#
+  
 BTCRPCEXPLORER_VERSION="v3.4.0"
 BTCRPCEXPLORER_VERSION=$(get_app_version "$BTCRPCEXPLORER_VERSION" "btcrpcexplorer")
 BTCRPCEXPLORER_VERSION_FILE=/home/bitcoin/.mynode/btcrpcexplorer_version
